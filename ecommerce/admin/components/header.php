@@ -407,7 +407,7 @@
            <li class="nav-item">
             <a class="nav-link" href="./categories.php">
               <i class="fa fa-puzzle-piece menu-icon"></i>
-              <span class="menu-title">Categories</span>
+              <span class="menu-title">Products</span>
             </a>
           </li>
           <li class="nav-item">

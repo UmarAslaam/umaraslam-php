@@ -405,7 +405,7 @@
             </a>
           </li>
            <li class="nav-item">
-            <a class="nav-link" href="./categories.php">
+            <a class="nav-link" href="./products.php">
               <i class="fa fa-puzzle-piece menu-icon"></i>
               <span class="menu-title">Products</span>
             </a>

@@ -1,0 +1,183 @@
+1. Admin Folder -> All admin files in admin folder
+2. User Folder -> All user Files in User Folder
+3. config Folder -> connection.php
+
+(a) connection.php File works 
+
+<?php 
+$host = "localhost";
+$dbuser = "root";
+$dbpassword = "";
+$dbname = "2512b2-php";
+
+$connection = mysqli_connect($host,$dbuser,$dbpassword,$dbname);
+if(!$connection){
+    die("Failed to connect");  
+}
+?>
+
+(b) ab database ko jahan connect krna ho tw ham ye krdengy
+
+<?php 
+include_once("../config/connection.php");
+?>
+
+4. PHP Products Fetch & Display 
+
+(a) Code
+
+  <?php
+                      $getProducts = "SELECT * FROM `products`";
+                      $result = mysqli_query($connection,$getProducts);
+                      if(mysqli_num_rows($result) > 0) {
+                        while($row = mysqli_fetch_assoc($result)){
+                          ?>
+                       <tbody>
+                          <tr>
+                              <td><?php echo $row['product_id']?></td>
+                              <td>
+                                <label class="badge badge-info">On hold</label>
+                              </td>
+                              <td>
+                                <button class="btn btn-outline-primary">View</button>
+                              </td>
+                          </tr>
+                      </tbody>                          
+                          <?php
+                        }
+                      }                     
+                      ?>
+
+
+(b) $getProducts = "SELECT * FROM `products`";
+Database ki products table se saara data lene ke liye SQL query banayi gayi hai.
+
+(c) $result = mysqli_query($connection, $getProducts);
+mysqli_query() SQL query ko database par execute/run karta hai.
+
+$connection → Database connection
+$getProducts → SQL query
+$result → Query ka result
+
+(d) if(mysqli_num_rows($result) > 0)
+mysqli_num_rows() check karta hai ke result mein kitni rows/records hain.
+
+(e) while($row = mysqli_fetch_assoc($result))
+while loop ek ek karke har product ko read karta hai.
+mysqli_fetch_assoc() product ka data associative array mein deta hai.
+
+(f) <td><?php echo $row['product_id']?></td>
+Database se product ki product_id lekar table mein display karta hai.
+
+5. Add Products
+
+(a) form code 
+
+     <form class="forms-sample" action="" method="post">
+                    <div class="form-group">
+                      <label for="title">Title</label>
+                      <input type="text" class="form-control" required name="title" id="title" placeholder="Enter product title">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="price">Price</label>
+                      <input type="text" class="form-control" required name="price" id="price" placeholder="Enter product price">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="stock">Stock</label>
+                      <input type="text" class="form-control" required name="stock" id="stock" placeholder="Enter product stock">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="image">Image</label>
+                      <input type="text" class="form-control" required name="image" id="image" placeholder="Upload product image">
+                    </div>
+                
+                    <div class="form-group">
+                      <label for="cat_id">Category</label>
+                        <select class="form-control" required name="cat_id" id="cat_id" placeholder="Enter category">
+                            <option selected disabled>Select Category</option>
+                          <option value="1">Men</option>
+                          <option value="2">Women</option>
+                        </select>
+                      </div>
+                    <!-- <div class="form-group">
+                      <label>File upload</label>
+                      <input type="file" name="img[]" class="file-upload-default">
+                      <div class="input-group col-xs-12">
+                        <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
+                        <span class="input-group-append">
+                          <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+                        </span>
+                      </div>
+                    </div> -->
+                    <div class="form-group">
+                      <label for="description">Description</label>
+                      <textarea class="form-control" required name="description" id="description" rows="4"  placeholder="Enter Product description"></textarea>
+                    </div>
+                    <button type="submit" name="addProduct" class="btn btn-primary mr-2">Submit</button>
+                    <button class="btn btn-light">Cancel</button>
+                  </form>
+
+
+(b) php form wok 
+
+   <?php
+   include_once("./components/footer.php");
+
+   if(isset($_POST['addProduct'])){
+    $title = $_POST['title'];
+    $price = $_POST['price'];
+    $stock = $_POST['stock'];
+    $image = $_POST['image'];
+    $cat_id = $_POST['cat_id'];
+    $description = $_POST['description'];
+
+    $add = "INSERT INTO `products`(`title`, `description`, `price`, `stock`, `image`, `cat_id`) VALUES ('$title','$description','$price','$stock','$image','$cat_id')";
+
+    $result = mysqli_query($connection,$add);
+    if($result){
+        echo"<script>alert('Product add successfully')
+         window.location.href='./products.php'
+        </script>";
+    }
+    else{
+          echo"<script>alert('Failed to add product')
+        </script>";
+
+    }
+
+   }
+   ?>
+
+6. How to category name show code :
+
+ $getProducts = "SELECT * FROM `products` as p
+ INNER JOIN `categories` as c
+ ON p.cat_id = c.cat_id; ";
+
+<td><?php echo $row['cat_name']?></td>
+
+7. How to Categories Dropdown dynamic code :
+   <div class="form-group">
+                      <label for="cat_id">Category</label>
+                        <select class="form-control" required name="cat_id" id="cat_id" placeholder="Enter category">
+                            <option selected disabled>Select Category</option>
+                            <?php
+                            $getCategories = "SELECT * FROM `categories`";
+                            $getCategoriesresult = mysqli_query($connection,$getCategories);
+                            if(mysqli_num_rows($getCategoriesresult)> 0){
+                              while($row= mysqli_fetch_assoc($getCategoriesresult)){
+                                ?>
+                                <option value="<?= $row['cat_id'] ?>"><?= $row['cat_name'] ?></option>
+                                <?php
+                              }
+                            } 
+                            ?>
+                        </select>
+                    </div>
+
+
+
+

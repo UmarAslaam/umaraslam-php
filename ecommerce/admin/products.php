@@ -33,7 +33,9 @@ include_once("../config/connection.php");
                         </tr>
                       </thead>
                       <?php
-                      $getProducts = "SELECT * FROM `products`";
+                      $getProducts = "SELECT * FROM `products` as p
+                      INNER JOIN `categories` as c
+                      ON p.cat_id = c.cat_id; ";
                       $result = mysqli_query($connection,$getProducts);
                       if(mysqli_num_rows($result) > 0) {
                         while($row = mysqli_fetch_assoc($result)){
@@ -45,10 +47,10 @@ include_once("../config/connection.php");
                               <td><?php echo $row['description']?></td>
                               <td><?php echo $row['price']?></td>
                               <td><?php echo $row['stock']?></td>
-                              <td><?php echo $row['image']?></td>
-                              <td><?php echo $row['cat_id']?></td>
+                              <td><img src="<?php echo $row['image']?>" class="rounded-circle" height="65" alt=""></td>
+                              <td><?php echo $row['cat_name']?></td>
                               <td>
-                                <label class="badge badge-info">On hold</label>
+                                <label class="badge badge-info"><?php echo $row['created_at']?></label>
                               </td>
                               <td>
                                 <button class="btn btn-outline-primary">View</button>

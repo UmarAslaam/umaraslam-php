@@ -27,26 +27,26 @@ include_once("../config/connection.php");
 (a) Code
 
   <?php
-                      $getProducts = "SELECT * FROM `products`";
-                      $result = mysqli_query($connection,$getProducts);
-                      if(mysqli_num_rows($result) > 0) {
-                        while($row = mysqli_fetch_assoc($result)){
-                          ?>
-                       <tbody>
-                          <tr>
-                              <td><?php echo $row['product_id']?></td>
-                              <td>
-                                <label class="badge badge-info">On hold</label>
-                              </td>
-                              <td>
-                                <button class="btn btn-outline-primary">View</button>
-                              </td>
-                          </tr>
-                      </tbody>                          
-                          <?php
-                        }
-                      }                     
-                      ?>
+    $getProducts = "SELECT * FROM `products`";
+    $result = mysqli_query($connection,$getProducts);
+    if(mysqli_num_rows($result) > 0) {
+      while($row = mysqli_fetch_assoc($result)){
+        ?>
+      <tbody>
+        <tr>
+            <td><?php echo $row['product_id']?></td>
+            <td>
+              <label class="badge badge-info">On hold</label>
+            </td>
+            <td>
+              <button class="btn btn-outline-primary">View</button>
+            </td>
+        </tr>
+    </tbody>                          
+        <?php
+      }
+    }                     
+  ?>
 
 
 (b) $getProducts = "SELECT * FROM `products`";
@@ -74,51 +74,51 @@ Database se product ki product_id lekar table mein display karta hai.
 (a) form code 
 
      <form class="forms-sample" action="" method="post">
-                    <div class="form-group">
-                      <label for="title">Title</label>
-                      <input type="text" class="form-control" required name="title" id="title" placeholder="Enter product title">
-                    </div>
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" class="form-control" required name="title" id="title" placeholder="Enter product title">
+        </div>
 
-                    <div class="form-group">
-                      <label for="price">Price</label>
-                      <input type="text" class="form-control" required name="price" id="price" placeholder="Enter product price">
-                    </div>
+        <div class="form-group">
+          <label for="price">Price</label>
+          <input type="text" class="form-control" required name="price" id="price" placeholder="Enter product price">
+        </div>
 
-                    <div class="form-group">
-                      <label for="stock">Stock</label>
-                      <input type="text" class="form-control" required name="stock" id="stock" placeholder="Enter product stock">
-                    </div>
+        <div class="form-group">
+          <label for="stock">Stock</label>
+          <input type="text" class="form-control" required name="stock" id="stock" placeholder="Enter product stock">
+        </div>
 
-                    <div class="form-group">
-                      <label for="image">Image</label>
-                      <input type="text" class="form-control" required name="image" id="image" placeholder="Upload product image">
-                    </div>
-                
-                    <div class="form-group">
-                      <label for="cat_id">Category</label>
-                        <select class="form-control" required name="cat_id" id="cat_id" placeholder="Enter category">
-                            <option selected disabled>Select Category</option>
-                          <option value="1">Men</option>
-                          <option value="2">Women</option>
-                        </select>
-                      </div>
-                    <!-- <div class="form-group">
-                      <label>File upload</label>
-                      <input type="file" name="img[]" class="file-upload-default">
-                      <div class="input-group col-xs-12">
-                        <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
-                        <span class="input-group-append">
-                          <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
-                        </span>
-                      </div>
-                    </div> -->
-                    <div class="form-group">
-                      <label for="description">Description</label>
-                      <textarea class="form-control" required name="description" id="description" rows="4"  placeholder="Enter Product description"></textarea>
-                    </div>
-                    <button type="submit" name="addProduct" class="btn btn-primary mr-2">Submit</button>
-                    <button class="btn btn-light">Cancel</button>
-                  </form>
+        <div class="form-group">
+          <label for="image">Image</label>
+          <input type="text" class="form-control" required name="image" id="image" placeholder="Upload product image">
+        </div>
+    
+        <div class="form-group">
+          <label for="cat_id">Category</label>
+            <select class="form-control" required name="cat_id" id="cat_id" placeholder="Enter category">
+                <option selected disabled>Select Category</option>
+              <option value="1">Men</option>
+              <option value="2">Women</option>
+            </select>
+          </div>
+        <!-- <div class="form-group">
+          <label>File upload</label>
+          <input type="file" name="img[]" class="file-upload-default">
+          <div class="input-group col-xs-12">
+            <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
+            <span class="input-group-append">
+              <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+            </span>
+          </div>
+        </div> -->
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea class="form-control" required name="description" id="description" rows="4"  placeholder="Enter Product description"></textarea>
+        </div>
+        <button type="submit" name="addProduct" class="btn btn-primary mr-2">Submit</button>
+        <button class="btn btn-light">Cancel</button>
+     </form>
 
 
 (b) php form wok 
@@ -161,22 +161,63 @@ Database se product ki product_id lekar table mein display karta hai.
 
 7. How to Categories Dropdown dynamic code :
    <div class="form-group">
-                      <label for="cat_id">Category</label>
-                        <select class="form-control" required name="cat_id" id="cat_id" placeholder="Enter category">
-                            <option selected disabled>Select Category</option>
-                            <?php
-                            $getCategories = "SELECT * FROM `categories`";
-                            $getCategoriesresult = mysqli_query($connection,$getCategories);
-                            if(mysqli_num_rows($getCategoriesresult)> 0){
-                              while($row= mysqli_fetch_assoc($getCategoriesresult)){
-                                ?>
-                                <option value="<?= $row['cat_id'] ?>"><?= $row['cat_name'] ?></option>
-                                <?php
-                              }
-                            } 
-                            ?>
-                        </select>
-                    </div>
+      <label for="cat_id">Category</label>
+          <select class="form-control" required name="cat_id" id="cat_id" placeholder="Enter category">
+              <option selected disabled>Select Category</option>
+              <?php
+              $getCategories = "SELECT * FROM `categories`";
+              $getCategoriesresult = mysqli_query($connection,$getCategories);
+              if(mysqli_num_rows($getCategoriesresult)> 0){
+                while($row= mysqli_fetch_assoc($getCategoriesresult)){
+                  ?>
+                  <option value="<?= $row['cat_id'] ?>"><?= $row['cat_name'] ?></option>
+                  <?php
+                }
+              } 
+              ?>
+          </select>
+   </div>
+
+8. How to delete product:
+
+(a)  <a href="./deletepProductDetails.php?id=<?= $row['product_id'] ?>"
+      class="btn btn-sm btn-danger rounded-pill px-3"
+      onclick="return confirm('Are you sure you want to delete this product?');">
+        Delete
+     </a>
+
+(b)  <?php 
+require_once("../config/connection.php");
+
+
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    // echo $id;
+    $deleteQuery="DELETE FROM `products` WHERE product_id=$id;";
+    $result = mysqli_query($connection,$deleteQuery);
+    if ($result) {
+           echo"<script>alert('Product delete successfully')
+            location.href='./products.php';
+            </script>";
+    }
+    else{
+          echo"<script>alert('Failed to delete product')
+            location.href='./products.php';
+            </script>";
+    }   
+}
+else{
+    echo"<script>alert('No id found')
+location.href='./products.php';
+</script>
+";
+}
+?>
+     
+
+
+     
+
 
 
 

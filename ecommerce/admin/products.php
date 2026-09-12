@@ -1,6 +1,9 @@
-<?php 
+
+  <?php 
 include_once("./components/header.php");
 include_once("../config/connection.php");
+
+
 ?>
       <!-- partial -->
       <div class="main-panel">
@@ -11,7 +14,8 @@ include_once("../config/connection.php");
             </h3>
           </div>
           <div class="row grid-margin">
-         <div class="card">
+           
+ <div class="card">
             <div class="card-body">
               <h4 class="card-title">Data table</h4>
               <div class="row">
@@ -29,45 +33,73 @@ include_once("../config/connection.php");
                             <th>Category</th>
                             <th>Created at</th>
                             <th>Actions</th>
-
                         </tr>
                       </thead>
-                      <?php
-                      $getProducts = "SELECT * FROM `products` as p
-                      INNER JOIN `categories` as c
-                      ON p.cat_id = c.cat_id; ";
-                      $result = mysqli_query($connection,$getProducts);
-                      if(mysqli_num_rows($result) > 0) {
-                        while($row = mysqli_fetch_assoc($result)){
-                          ?>
-                       <tbody>
-                          <tr>
-                              <td><?php echo $row['product_id']?></td>
-                              <td><?php echo $row['title']?></td>
-                              <td><?php echo $row['description']?></td>
-                              <td><?php echo $row['price']?></td>
-                              <td><?php echo $row['stock']?></td>
-                              <td><img src="<?php echo $row['image']?>" class="rounded-circle" height="65" alt=""></td>
-                              <td><?php echo $row['cat_name']?></td>
-                              <td>
-                                <label class="badge badge-info"><?php echo $row['created_at']?></label>
-                              </td>
-                              <td>
-                                <button class="btn btn-outline-primary">View</button>
-                              </td>
-                          </tr>
-                      </tbody>                          
-                          <?php
-                        }
-                      }                     
-                      ?>
+                      <tbody>
+
+
+<?php 
+
+  $getProducts= "SELECT * FROM `products` as p
+  INNER JOIN `categories` as c
+  ON p.cat_id = c.cat_id; ";
+
+  $result= mysqli_query($connection,$getProducts);
+
+  if(mysqli_num_rows($result)   > 0){
+
+  while($row = mysqli_fetch_assoc($result) ){
+?>
+<tr>
+                            <td><?= $row['product_id'] ?></td>
+                            <td><?= $row['title'] ?></td>
+                            <td><?= $row['description'] ?></td>
+                            <td><?= $row['price'] ?></td>
+                            <td><?= $row['stock'] ?></td>
+                            <td><img src="<?= $row['image'] ?>" alt="" height="65" class="rounded-circle"></td>
+                            <td><?= $row['cat_name'] ?></td>
+                            <td>
+                              <label class="badge badge-info"><?= $row['created_at'] ?></label>
+                            </td>
+                             <td class="text-nowrap">
+                              <a href="./productDetails.php?id=<?= $row['product_id'] ?>"
+                                class="btn btn-sm btn-primary rounded-pill px-3">
+                                  View
+                              </a>
+
+                              <a href="./editProduct.php?id=<?= $row['product_id'] ?>"
+                                class="btn btn-sm btn-warning rounded-pill px-3">
+                                  Edit
+                              </a>
+
+                              <a href="./deletepProductDetails.php?id=<?= $row['product_id'] ?>"
+                                class="btn btn-sm btn-danger rounded-pill px-3"
+                                onclick="return confirm('Are you sure you want to delete this product?');">
+                                  Delete
+                              </a>
+                            </td>
+                        </tr>
+<?php
+}
+}
+
+?>
+
+
+                        
                   
+                      </tbody>
                     </table>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
+
+
+          </div>
+        
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
@@ -80,11 +112,10 @@ include_once("../config/connection.php");
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
+  <?php 
+include_once("./components/footer.php");
 
-
-
-   <?php
-   include_once("./components/footer.php");
-   ?>       <!-- Custom js for this page-->
-      <script src="./js/data-table.js"></script>
-      <!-- End custom js for this page--> 
+?>
+  <!-- Custom js for this page-->
+  <script src="./js/data-table.js"></script>
+  <!-- End custom js for this page-->

@@ -73,12 +73,13 @@ if(isset($_GET['id'])){
                         </span>
                       </div>
                     </div> -->
+
                     <div class="form-group">
                       <label for="description">Description</label>
                       <textarea class="form-control" required name="description" id="description" rows="4"  placeholder="Enter Product description"><?= $row['description'] ?></textarea>
                     </div>
                     <button type="submit" name="updateProduct" class="btn btn-primary mr-2">Update</button>
-                    <button class="btn btn-light">Cancel</button>
+                    <a href="./products.php" class="btn btn-light">Cancel</a>
                   </form>
                 </div>
               </div>

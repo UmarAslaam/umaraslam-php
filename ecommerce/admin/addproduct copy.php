@@ -16,7 +16,7 @@ include_once("../config/connection.php");
                 <div class="card-body">
                   <h4 class="card-title">Enter Product Detail</h4>
                  
-                  <form class="forms-sample" action="" method="post" enctype="multipart/form-data">
+                  <form class="forms-sample" action="" method="post">
                     <div class="form-group">
                       <label for="title">Title</label>
                       <input type="text" class="form-control" required name="title" id="title" placeholder="Enter product title">
@@ -32,10 +32,10 @@ include_once("../config/connection.php");
                       <input type="text" class="form-control" required name="stock" id="stock" placeholder="Enter product stock">
                     </div>
 
-                    <!-- <div class="form-group">
+                    <div class="form-group">
                       <label for="image">Image</label>
                       <input type="text" class="form-control" required name="image" id="image" placeholder="Upload product image">
-                    </div> -->
+                    </div>
                 
                     <div class="form-group">
                       <label for="cat_id">Category</label>
@@ -55,17 +55,16 @@ include_once("../config/connection.php");
                         </select>
                     </div>
                     
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label>File upload</label>
-                      <input type="file" name="img" class="file-upload-default">
+                      <input type="file" name="img[]" class="file-upload-default">
                       <div class="input-group col-xs-12">
                         <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
                         <span class="input-group-append">
                           <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
                         </span>
                       </div>
-                    </div>
-
+                    </div> -->
                     <div class="form-group">
                       <label for="description">Description</label>
                       <textarea class="form-control" required name="description" id="description" rows="4"  placeholder="Enter Product description"></textarea>
@@ -96,42 +95,25 @@ include_once("../config/connection.php");
     $title = $_POST['title'];
     $price = $_POST['price'];
     $stock = $_POST['stock'];
-    // $image = $_POST['image'];
+    $image = $_POST['image'];
     $cat_id = $_POST['cat_id'];
     $description = $_POST['description'];
-     echo "<pre>";
-     print_r($_FILES['img']);
-     echo "</pre>";
-    
-    //  Image is present or not
-     if ($_FILES['img']['error']==4) {
-      echo"<script>alert('Plz select image first')</script>";
-     }
 
-    //  Image is valid or not
-    if ($_FILES['img']['size']==2000000) {
-      echo"<script>alert('File is too large plz upload file is less then 2 MB')</script>";
-     }
+    $add = "INSERT INTO `products`(`title`, `description`, `price`, `stock`, `image`, `cat_id`) VALUES ('$title','$description','$price','$stock','$image','$cat_id')";
 
+    $result = mysqli_query($connection,$add);
+    if($result){
+        echo"<script>alert('Product add successfully')
+         window.location.href='./products.php'
+        </script>";
+    }
+    else{
+          echo"<script>alert('Failed to add product')
+        </script>";
 
-    // $add = "INSERT INTO `products`(`title`, `description`, `price`, `stock`, `image`, `cat_id`) VALUES ('$title','$description','$price','$stock','$image','$cat_id')";
-
-    // $result = mysqli_query($connection,$add);
-    // if($result){
-    //     echo"<script>alert('Product add successfully')
-    //      window.location.href='./products.php'
-    //     </script>";
-    // }
-    // else{
-    //       echo"<script>alert('Failed to add product')
-    //     </script>";
-
-    // }
+    }
 
    }
    ?>
-<!-- File uplaod scripts start -->
-<script src="./js/file-upload.js"></script>
-<!-- File uplaod scripts end -->
 
    

@@ -36,7 +36,7 @@ include_once("../config/connection.php");
                         </tr>
                       </thead>
                       <tbody>
-
+  
 
 <?php 
 
@@ -46,7 +46,7 @@ include_once("../config/connection.php");
 
   $result= mysqli_query($connection,$getProducts);
 
-  if(mysqli_num_rows($result)   > 0){
+  if(mysqli_num_rows($result) > 0){
 
   while($row = mysqli_fetch_assoc($result) ){
 ?>

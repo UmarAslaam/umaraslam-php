@@ -78,7 +78,7 @@ include_once("../config/connection.php");
                                   Delete
                               </a>
                             </td>
-                        </tr>
+</tr>
 <?php
 }
 }

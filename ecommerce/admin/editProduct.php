@@ -18,11 +18,10 @@ if(isset($_GET['id'])){
             </h3>
           </div>
           <div class="row grid-margin">
-               <div class="col-12 grid-margin stretch-card">
+              <div class="col-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Edit Product Detail</h4>
-                 
                   <form class="forms-sample" action="" method="post">
                     <div class="form-group">
                       <label for="title">Title</label>
@@ -46,16 +45,16 @@ if(isset($_GET['id'])){
                 
                     <div class="form-group">
                       <label for="cat_id">Category</label>
-                        <select class="form-control" required name="cat_id" id="cat_id" placeholder="Enter category">
+                        <select class="form-control" required name="cat_id" id="cat_id">
                             <option selected disabled>Select Category</option>
                             <?php
                             $getCategories = "SELECT * FROM `categories`";
                             $getCategoriesresult = mysqli_query($connection,$getCategories);
-                            if(mysqli_num_rows($getCategoriesresult)> 0){
+                            if(mysqli_num_rows($getCategoriesresult) > 0){
                               while($row1= mysqli_fetch_assoc($getCategoriesresult)){
                                 ?>
                                 <!-- <option value="<?= $row1['cat_id'] ?>"><?= $row1['cat_name'] ?></option> -->
-                                 <option value="<?= $row1['cat_id'] ?>" <?= ($row1['cat_id'] == $row['cat_id']) ? 'selected' : '' ?> > <?= $row1['cat_name'] ?> </option>
+                                 <option value="<?= $row1['cat_id'] ?>" <?= ($row1['cat_id'] == $row['cat_id']) ? 'selected' : '' ?>> <?= $row1['cat_name'] ?> </option>
                                 <?php
                               }
                             } 
@@ -116,7 +115,7 @@ if(isset($_GET['id'])){
          window.location.href='./products.php'
         </script>";
     }
-    else{
+    else{                                            
           echo"<script>alert('Failed to Update product')
         </script>";
 

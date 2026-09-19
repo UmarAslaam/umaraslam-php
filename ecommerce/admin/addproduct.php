@@ -99,7 +99,9 @@ include_once("../config/connection.php");
     // $image = $_POST['image'];
     $cat_id = $_POST['cat_id'];
     $description = $_POST['description'];
-     echo "<pre>";
+    $allowedTypes = ['image/png','image/jpg','image/jpeg','image/web','image/gif','image/jfif'];
+    
+    echo "<pre>";
      print_r($_FILES['img']);
      echo "</pre>";
     
@@ -109,24 +111,35 @@ include_once("../config/connection.php");
      }
 
     //  Image is valid or not
-    if ($_FILES['img']['size']==2000000) {
+    else if ($_FILES['img']['size']==2000000) {
       echo"<script>alert('File is too large plz upload file is less then 2 MB')</script>";
      }
+     //  Image type check
+    else if (!in_array($_FILES['img']['type'],$allowedTypes)){
+      echo"<script>alert('File type is not supported plz slect file type png,jpg,jpeg,jif,web')</script>";
+     }
+     else {
+        //  echo"<script>alert('ab thk hy')</script>";
+        $imageName = uniqid() . '_' . $_FILES['img']['name'];
+        
+        $add = "INSERT INTO `products`(`title`, `description`, `price`, `stock`, `image`, `cat_id`) VALUES ('$title','$description','$price','$stock','$imageName','$cat_id')";
+
+        $result = mysqli_query($connection,$add);
+        if($result){
+          move_uploaded_file($_FILES['img']['tmp_name'],"uploads/".$imageName); 
+          
+            echo"<script>alert('Product add successfully')
+            window.location.href='./products.php'
+            </script>";
+        }
+        else{
+              echo"<script>alert('Failed to add product')
+            </script>";
+
+        }
+        }
 
 
-    // $add = "INSERT INTO `products`(`title`, `description`, `price`, `stock`, `image`, `cat_id`) VALUES ('$title','$description','$price','$stock','$image','$cat_id')";
-
-    // $result = mysqli_query($connection,$add);
-    // if($result){
-    //     echo"<script>alert('Product add successfully')
-    //      window.location.href='./products.php'
-    //     </script>";
-    // }
-    // else{
-    //       echo"<script>alert('Failed to add product')
-    //     </script>";
-
-    // }
 
    }
    ?>

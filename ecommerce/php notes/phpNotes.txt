@@ -365,8 +365,68 @@ location.href='./products.php';
 }
 ?>
 
+10. How to file uploading:
+
+ (a)first of all file upload html code.
+
+   <div class="form-group">
+      <label>File upload</label>
+      <input type="file" name="img" class="file-upload-default">
+      <div class="input-group col-xs-12">
+        <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
+        <span class="input-group-append">
+          <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+        </span>
+      </div>
+    </div>
+
+    (b) second of all this write in addProduct.php 
+    <form class="forms-sample" action="" method="post" enctype="multipart/form-data">
+
+    (c) create upload folder in admin folder
+
    
-     
+    (d)  file uploading code in addProduct.php
+
+    $allowedTypes = ['image/png','image/jpg','image/jpeg','image/web','image/gif','image/jfif'];
+    
+    echo "<pre>";
+     print_r($_FILES['img']);
+     echo "</pre>";
+    
+    //  Image is present or not
+     if ($_FILES['img']['error']==4) {
+      echo"<script>alert('Plz select image first')</script>";
+     }
+
+    //  Image is valid or not
+    else if ($_FILES['img']['size']==2000000) {
+      echo"<script>alert('File is too large plz upload file is less then 2 MB')</script>";
+     }
+     //  Image type check
+    else if (!in_array($_FILES['img']['type'],$allowedTypes)){
+      echo"<script>alert('File type is not supported plz slect file type png,jpg,jpeg,jif,web')</script>";
+     }
+     else {
+        //  echo"<script>alert('ab thk hy')</script>";
+        $imageName = uniqid() . '_' . $_FILES['img']['name'];
+        
+        $add = "INSERT INTO `products`(`title`, `description`, `price`, `stock`, `image`, `cat_id`) VALUES ('$title','$description','$price','$stock','$imageName','$cat_id')";
+
+        $result = mysqli_query($connection,$add);
+        if($result){
+          move_uploaded_file($_FILES['img']['tmp_name'],"uploads/".$imageName); 
+          
+            echo"<script>alert('Product add successfully')
+            window.location.href='./products.php'
+            </script>";
+        }
+        else{
+              echo"<script>alert('Failed to add product')
+            </script>";
+
+        }
+        }  
 
 
 

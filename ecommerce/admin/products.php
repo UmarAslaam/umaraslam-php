@@ -12,6 +12,8 @@ include_once("../config/connection.php");
             <h3 class="page-title">
               Products
             </h3>
+
+          <a href="./addProduct.php" class="btn btn-primary">Add Product</a>
           </div>
           <div class="row grid-margin">
            
@@ -56,7 +58,7 @@ include_once("../config/connection.php");
                             <td><?= $row['description'] ?></td>
                             <td><?= $row['price'] ?></td>
                             <td><?= $row['stock'] ?></td>
-                            <td><img src="<?= $row['image'] ?>" alt="" height="65" class="rounded-circle"></td>
+                            <td><img src="./uploads/<?= $row['image'] ?>" alt="" height="65" class="rounded-circle"></td>
                             <td><?= $row['cat_name'] ?></td>
                             <td>
                               <label class="badge badge-info"><?= $row['created_at'] ?></label>

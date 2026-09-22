@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 10, 2026 at 07:17 AM
+-- Generation Time: Sep 22, 2026 at 07:13 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -64,11 +64,28 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `title`, `description`, `price`, `stock`, `image`, `cat_id`, `created_at`) VALUES
-(1, 'Jacket', 'This is a Jacket', 5000, 15, 'jacket.png', 1, '2026-09-03 10:20:30'),
-(2, 'Clutch bag', 'This is a clutch bag', 8999, 100, 'clutch.png', 2, '2026-09-03 10:21:40'),
-(3, 'sunglasses', 'sunglasses for men', 2000, 140, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_TXCFPLFqgOrfue86GIbu4mdUJZTgRaVU1y-ua-U24xkks4BIguygG2CI&s=10', 1, '2026-09-08 10:46:19'),
-(5, 'watch', 'watch for women', 5000, 100, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_TXCFPLFqgOrfue86GIbu4mdUJZTgRaVU1y-ua-U24xkks4BIguygG2CI&s=10', 2, '2026-09-08 10:49:18'),
-(6, 'Toys', 'best toys', 4000, 600, 'https://toyishland.com/wp-content/uploads/2026/03/Raptor-Stroller-Red-1-1.webp', 3, '2026-09-10 10:07:58');
+(1, 'Jacket', 'This is a Jacket', 5000, 15, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTOs7vsbgdJfxEQaZqdZmAV0KqektNnIvb1T8dbYy--2dG8g_Ijb_dVNm3&s=10', 1, '2026-09-03 10:20:30'),
+(3, 'sunglasses', 'sunglasses for men', 2000, 140, 'https://www.mvmt.com/dw/image/v2/BDKZ_PRD/on/demandware.static/-/Sites-mgi-master/default/dw7b2a3529/images/products/28100249_an.jpg?sw=532&sh=300&q=85', 1, '2026-09-08 10:46:19'),
+(5, 'watch by owais', 'Branded Watches For Women Online', 11000, 100, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmonLfnQ7sr4cLWIf5F0eW_A3b4jea5-8Q7pyB7szkDUR8s9R2e4SfPwB3&s=10', 2, '2026-09-08 10:49:18'),
+(6, 'Toys', 'best toys', 4000, 600, 'https://toyishland.com/wp-content/uploads/2026/03/Raptor-Stroller-Red-1-1.webp', 3, '2026-09-10 10:07:58'),
+(7, 'Consectetur sit ir', 'Commodo culpa facil', 584, 0, '6aae21fa9ddbe_screencapture-localhost-5173-2026-09-14-18_45_19.png', 2, '2026-09-19 10:47:38'),
+(8, 'toys', 'All toys for kids', 5000, 15, '6aae2244d21c7_kids.jfif', 3, '2026-09-19 10:48:52');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` enum('admin','user') NOT NULL DEFAULT 'user',
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `status` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -101,7 +118,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables

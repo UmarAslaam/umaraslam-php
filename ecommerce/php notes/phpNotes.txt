@@ -380,13 +380,15 @@ location.href='./products.php';
       </div>
     </div>
 
-    (b) second of all this write in addProduct.php 
+    (b) file uploading script call :
+    <script src="./js/file-upload.js"></script>
+
+    (c) second of all this write in addProduct.php 
     <form class="forms-sample" action="" method="post" enctype="multipart/form-data">
 
-    (c) create upload folder in admin folder
+    (d) create upload folder in admin folder
 
-   
-    (d)  file uploading code in addProduct.php
+    (e)  file uploading code in addProduct.php
 
     $allowedTypes = ['image/png','image/jpg','image/jpeg','image/web','image/gif','image/jfif'];
     
@@ -427,6 +429,8 @@ location.href='./products.php';
 
         }
         }  
+
+        
 
 
 

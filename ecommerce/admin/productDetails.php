@@ -86,13 +86,7 @@ if (mysqli_num_rows($result) > 0) {
                         <!-- Product Image -->
                         <div class="text-center mb-4">
 
-                            <img
-                                src="<?= $row['image'] ?>"
-                                alt="Product Image"
-                                height="200"
-                                width="200"
-                                class="rounded"
-                            >
+                            <img src="./uploads/<?= $row['image'] ?>" alt="Product Image" height="200" width="200" class="rounded">
 
                         </div>
 

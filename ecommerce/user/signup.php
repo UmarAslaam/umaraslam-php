@@ -1,3 +1,4 @@
+<?php require_once("../config/connection.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,7 +43,7 @@
                         <i class="fa fa-user text-primary"></i>
                       </span>
                     </div>
-                    <input type="text" name="username" class="form-control form-control-lg border-left-0" placeholder="Username">
+                    <input type="text" name="username" class="form-control form-control-lg border-left-0" placeholder="Username" required>
                   </div>
                 </div>
                 <div class="form-group">
@@ -53,7 +54,7 @@
                         <i class="far fa-envelope-open text-primary"></i>
                       </span>
                     </div>
-                    <input type="email" name="email" class="form-control form-control-lg border-left-0" placeholder="Email">
+                    <input type="email" name="email" class="form-control form-control-lg border-left-0" placeholder="Email" required>
                   </div>
                 </div>
               
@@ -65,7 +66,7 @@
                         <i class="fa fa-lock text-primary"></i>
                       </span>
                     </div>
-                    <input type="password" name="password" class="form-control form-control-lg border-left-0" id="exampleInputPassword" placeholder="Password">                        
+                    <input type="password" name="password" class="form-control form-control-lg border-left-0" id="exampleInputPassword" placeholder="Password" required>                        
                   </div>
                 </div>
                 <div class="mb-4">
@@ -77,7 +78,7 @@
                   </div>
                 </div>
                 <div class="mt-3">
-                  <input type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" value="SIGN UP">
+                  <input type="submit" name="signup" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" value="SIGN UP">
                 </div>
                 <div class="text-center mt-4 font-weight-light">
                   Already have an account? <a href="login.php" class="text-primary">Login</a>
@@ -111,3 +112,34 @@
 
 <!-- Mirrored from www.urbanui.com/melody/template/pages/samples/register-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Sep 2018 06:08:54 GMT -->
 </html>
+
+<?php
+if (isset($_POST['signup'])) {
+  $username = mysqli_real_escape_string($connection,$_POST['username']);
+  $email = mysqli_real_escape_string($connection,$_POST['email']);
+  $password = mysqli_real_escape_string($connection,$_POST['password']);
+  $hashPassword = password_hash($password, PASSWORD_BCRYPT);
+
+  $checkuser = "SELECT * FROM users where email = '$email' ";
+  $checkUserResult = mysqli_query($connection,$checkuser);
+
+  if (mysqli_num_rows($checkUserResult) > 0) {
+    echo "<script>alert('Account already exist, please login')
+  location.href='./login.php'</script>";
+  }
+  else{
+    $adduser = "INSERT INTO `users`(`username`, `email`, `password`) VALUES ('$username','$email','$hashPassword')";
+    $userResult = mysqli_query($connection,$adduser);
+    if ($userResult) {
+       echo "<script>alert('Signup success. Login Now..!')
+            location.href='./login.php'</script>";
+    } else {
+       echo "<script>alert('Signup Failed. Try Again..!')</script>";
+    }
+  }
+
+ 
+}
+?>
+
+

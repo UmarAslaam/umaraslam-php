@@ -120,12 +120,14 @@ include_once("../config/connection.php");
      }
      else {
         //  echo"<script>alert('ab thk hy')</script>";
+    // Image Name Create
         $imageName = uniqid() . '_' . $_FILES['img']['name'];
         
         $add = "INSERT INTO `products`(`title`, `description`, `price`, `stock`, `image`, `cat_id`) VALUES ('$title','$description','$price','$stock','$imageName','$cat_id')";
 
         $result = mysqli_query($connection,$add);
         if($result){
+    // Folder k ander image chali jay gi
           move_uploaded_file($_FILES['img']['tmp_name'],"uploads/".$imageName); 
           
             echo"<script>alert('Product add successfully')

@@ -1,3 +1,5 @@
+<?php require_once("../config/connection.php"); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,16 +35,16 @@
               </div>
               <h4>Welcome back!</h4>
               <h6 class="font-weight-light">Happy to see you again!</h6>
-              <form class="pt-3">
+              <form class="pt-3" method="post">
                 <div class="form-group">
-                  <label for="exampleInputEmail">Username</label>
+                  <label for="exampleInputEmail">Email</label>
                   <div class="input-group">
                     <div class="input-group-prepend bg-transparent">
                       <span class="input-group-text bg-transparent border-right-0">
                         <i class="fa fa-user text-primary"></i>
                       </span>
                     </div>
-                    <input type="text" class="form-control form-control-lg border-left-0" id="exampleInputEmail" placeholder="Username">
+                    <input type="text" name="email" class="form-control form-control-lg border-left-0" id="exampleInputEmail" required  placeholder="Email">
                   </div>
                 </div>
                 <div class="form-group">
@@ -53,7 +55,7 @@
                         <i class="fa fa-lock text-primary"></i>
                       </span>
                     </div>
-                    <input type="password" class="form-control form-control-lg border-left-0" id="exampleInputPassword" placeholder="Password">                        
+                    <input type="password" name="password" class="form-control form-control-lg border-left-0" id="exampleInputPassword"required placeholder="Password">                        
                   </div>
                 </div>
                 <div class="my-2 d-flex justify-content-between align-items-center">
@@ -66,7 +68,7 @@
                   <a href="#" class="auth-link text-black">Forgot password?</a>
                 </div>
                 <div class="my-3">
-                  <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="../admin/index-2.html">LOGIN</a>
+                  <input type="submit" name="login" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" value="LOGIN"/>
                 </div>
                 <div class="mb-2 d-flex">
                   <button type="button" class="btn btn-facebook auth-form-btn flex-grow mr-1">
@@ -108,3 +110,37 @@
 
 <!-- Mirrored from www.urbanui.com/melody/template/pages/samples/login-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Sep 2018 06:08:53 GMT -->
 </html>
+<?php 
+if (isset($_POST['login'])) {
+  $email = mysqli_real_escape_string($connection,$_POST['email']);
+  $password = mysqli_real_escape_string($connection,$_POST['password']);
+
+
+  $checkUser = "SELECT * FROM users where email = '$email'";
+  $checkUserResult = mysqli_query($connection,$checkUser);
+  $userRow = mysqli_fetch_assoc($checkUserResult);
+
+  if (mysqli_num_rows($checkUserResult)== 0) {
+    echo"<script>alert('Account not exist plz signup')
+  location.href='./signup.php'</script>";
+  }
+  else{
+    // echo $userRow['password'];
+    $verifyPassword = password_verify($password,$userRow['password']);
+    // echo $verifyPassword;
+    if ($verifyPassword) {
+        echo"<script>alert('login success')
+        location.href='./index.php'</script>";
+    }
+    else{
+       echo"<script>alert('Invalid Credentials...!')</script>";
+
+    }
+    
+  }
+
+
+
+
+}
+?>

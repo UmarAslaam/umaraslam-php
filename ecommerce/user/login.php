@@ -1,4 +1,6 @@
-<?php require_once("../config/connection.php"); ?>
+<?php require_once("../config/connection.php");
+session_start();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -129,8 +131,23 @@ if (isset($_POST['login'])) {
     $verifyPassword = password_verify($password,$userRow['password']);
     // echo $verifyPassword;
     if ($verifyPassword) {
+
+      // Session work
+      $_SESSION['email'] = $userRow['email'];
+      $_SESSION['role'] = $userRow['role'];
+      $_SESSION['username'] = $userRow['username'];
+
+
+
+      if ($userRow['role'] == 'admin') {
         echo"<script>alert('login success')
+        location.href='../admin/index.php'</script>";
+      } else {
+         echo"<script>alert('login success')
         location.href='./index.php'</script>";
+      }
+      
+        
     }
     else{
        echo"<script>alert('Invalid Credentials...!')</script>";

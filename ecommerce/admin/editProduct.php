@@ -178,4 +178,8 @@ else{
    
   <!-- File uplaod scripts start -->
   <script src="./js/file-upload.js"></script>
+<<<<<<< HEAD
   <!-- File uplaod scripts end -->
+=======
+  <!-- File uplaod scripts end -->
+>>>>>>> 4f35681ce8729afd00f720ec518aaf8bd5584e4d

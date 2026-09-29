@@ -36,4 +36,10 @@ else{
           location.href='./products.php';
         </script>";
 }
+<<<<<<< HEAD
  ?>
+=======
+ ?>
+
+
+>>>>>>> 4f35681ce8729afd00f720ec518aaf8bd5584e4d

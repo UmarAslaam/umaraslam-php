@@ -1,3 +1,6 @@
+<?php
+session_start();
+$username = $_SESSION['username'];?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -390,7 +393,7 @@
               </div>
               <div class="profile-name">
                 <p class="name">
-                  Welcome Jane
+                  Welcome <?= $username ?>
                 </p>
                 <p class="designation">
                   Super Admin

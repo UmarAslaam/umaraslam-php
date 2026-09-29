@@ -664,6 +664,29 @@ location.href='./products.php';
         }
         ?>
 
+        ====================== 15. How to User role ======================
+        (a) code here :
+
+         if ($userRow['role'] == 'admin') {
+        echo"<script>alert('login success')
+        location.href='../admin/index.php'</script>";
+      } else {
+         echo"<script>alert('login success')
+        location.href='./index.php'</script>";
+      }
+
+        ====================== 16. How to Session create ======================
+        (a) first of all session call on top:
+        session_start();
+        
+        (B) session create :
+          $_SESSION['email'] = $userRow['email'];
+          $_SESSION['role'] = $userRow['role'];
+          $_SESSION['username'] = $userRow['username'];
+
+
+
+
 
 
         

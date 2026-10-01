@@ -1,6 +1,12 @@
 <?php
 session_start();
-$username = $_SESSION['username'];?>
+$username = $_SESSION['username'];
+
+if (!isset($_SESSION['role']) || $_SESSION['role']!="admin") {
+  echo "<script>location.href='../user/login.php'</script>";
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

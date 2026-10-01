@@ -676,6 +676,7 @@ location.href='./products.php';
       }
 
         ====================== 16. How to Session create ======================
+        Jis bnday ny login kia hy us k data ko session mn store kr k dobra kahen par ham us k data ko use kr skty hen
         (a) first of all session call on top:
         session_start();
         
@@ -683,6 +684,15 @@ location.href='./products.php';
           $_SESSION['email'] = $userRow['email'];
           $_SESSION['role'] = $userRow['role'];
           $_SESSION['username'] = $userRow['username'];
+
+
+
+        ====================== 17. How to Page access lock  ======================
+
+          if (!isset($_SESSION['role']) || $_SESSION['role']!="admin") {
+            echo "<script>location.href='../user/login.php'</script>";
+          }
+
 
 
 

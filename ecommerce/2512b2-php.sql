@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 22, 2026 at 07:13 AM
+-- Generation Time: Oct 10, 2026 at 07:49 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -38,9 +38,12 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`cat_id`, `cat_name`, `cat_desc`) VALUES
-(1, 'Men', 'All good quality bags for men'),
-(2, 'Women', 'All good quality bags for women\r\n'),
-(3, 'kids', 'All good products for kids');
+(4, 'Chargers', 'Mobile aur laptop chargers'),
+(5, 'USB Cables', 'Charging aur data cables'),
+(6, 'Headphones', 'Wired aur wireless headphones'),
+(7, 'Power Banks', 'Portable charging devices'),
+(8, 'Computer Accessories', 'Mouse, USB hub aur doosre accessories'),
+(9, 'Bluetooth Speakers', 'Wireless audio speakers');
 
 -- --------------------------------------------------------
 
@@ -64,12 +67,12 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `title`, `description`, `price`, `stock`, `image`, `cat_id`, `created_at`) VALUES
-(1, 'Jacket', 'This is a Jacket', 5000, 15, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTOs7vsbgdJfxEQaZqdZmAV0KqektNnIvb1T8dbYy--2dG8g_Ijb_dVNm3&s=10', 1, '2026-09-03 10:20:30'),
-(3, 'sunglasses', 'sunglasses for men', 2000, 140, 'https://www.mvmt.com/dw/image/v2/BDKZ_PRD/on/demandware.static/-/Sites-mgi-master/default/dw7b2a3529/images/products/28100249_an.jpg?sw=532&sh=300&q=85', 1, '2026-09-08 10:46:19'),
-(5, 'watch by owais', 'Branded Watches For Women Online', 11000, 100, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmonLfnQ7sr4cLWIf5F0eW_A3b4jea5-8Q7pyB7szkDUR8s9R2e4SfPwB3&s=10', 2, '2026-09-08 10:49:18'),
-(6, 'Toys', 'best toys', 4000, 600, 'https://toyishland.com/wp-content/uploads/2026/03/Raptor-Stroller-Red-1-1.webp', 3, '2026-09-10 10:07:58'),
-(7, 'Consectetur sit ir', 'Commodo culpa facil', 584, 0, '6aae21fa9ddbe_screencapture-localhost-5173-2026-09-14-18_45_19.png', 2, '2026-09-19 10:47:38'),
-(8, 'toys', 'All toys for kids', 5000, 15, '6aae2244d21c7_kids.jfif', 3, '2026-09-19 10:48:52');
+(9, 'Fast Charger', 'Best fast charger', 1200, 30, '6ac9cc1f4b67b_charger.jpg', 4, '2026-10-06 10:57:26'),
+(10, 'USB Cable', 'best USB Cable', 500, 50, '6ac9cc2c9cf43_usbcable.jfif', 5, '2026-10-06 10:57:26'),
+(11, 'Wireless Headphones', 'best Wireless Headphones', 2500, 20, '6ac9cc4a40484_wirelessheadphone.jfif', 6, '2026-10-06 10:57:26'),
+(12, 'Power Bank', 'best Power Bank', 3500, 15, '6ac9cc5678ba9_powerbank.avif', 7, '2026-10-06 10:57:26'),
+(13, 'Wireless Mouse', 'best Wireless Mouse', 1500, 25, '6ac9cc65675b7_wirelessmouse.jpg', 8, '2026-10-06 10:59:46'),
+(14, 'Bluetooth Speaker', 'Wireless audio speakers', 2200, 18, '6ac9cc748d262_bluetoothspeaker.jfif', 9, '2026-10-10 10:17:56');
 
 -- --------------------------------------------------------
 
@@ -86,6 +89,14 @@ CREATE TABLE `users` (
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `status` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `username`, `email`, `password`, `role`, `created_at`, `status`) VALUES
+(3, 'kamran', 'kamran@gmail.com', '$2y$10$18ob7nuAMC1u6BzaDD8RkeVCevCm8RzE0t3X.ifZDSFuBb/h80S6m', 'user', '2026-09-24 10:30:22', 1),
+(5, 'Umar', 'umar@gmail.com', '$2y$10$SYgPt./OCi22rF6kXUxIGueJCZGHyGpr6YShTWUCBYwi4U5CNu3nC', 'admin', '2026-09-26 10:45:45', 1);
 
 --
 -- Indexes for dumped tables
@@ -105,6 +116,12 @@ ALTER TABLE `products`
   ADD KEY `cat_id` (`cat_id`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -112,13 +129,19 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables

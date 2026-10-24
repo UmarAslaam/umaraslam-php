@@ -437,7 +437,7 @@ location.href='./products.php';
     $productImage = mysqli_fetch_assoc($getImage);
 
      // Product delete karo
-    $deleteProduct = "DELETE FROM products WHERE product_id = $id";
+    $deleteProduct = "DELETE FROM products WHERE product_id = $id";m
     $result = mysqli_query($connection, $deleteProduct);
  
   if ($result) {
@@ -694,6 +694,192 @@ location.href='./products.php';
           }
 
 
+       ====================== 18. How to create Shop page   ======================
+
+          <div class="row">
+              <?php 
+              $getProducts = "SELECT * FROM `products`as p
+              INNER JOIN `categories` as c
+              ON p.cat_id = c.cat_id;";
+              $result = mysqli_query($connection,$getProducts);
+              if (mysqli_num_rows($result)>0) {
+                  while ($row = mysqli_fetch_assoc($result)) {
+                      ?>
+                          <div class="col-lg-4 col-md-4 col-sm-6 mt-40 d-flex align-items-stretch">
+                  <!-- single-product-wrap start -->
+                  <div class="single-product-wrap w-100">
+                      <div class="product-image">
+                          <a href="./single-product.php?id=<?= $row['product_id']?>">
+                              <img src="../admin/uploads/<?= $row['image']?>" alt="Li's Product Image"  width="100%" height="250">
+                          </a>
+                          <span class="sticker">New</span>
+                      </div>
+                      <div class="product_desc">
+                          <div class="product_desc_info">
+                              <div class="product-review">
+                                  <h5 class="manufacturer">
+                                      <a href="./single-product.php?id=<?= $row['product_id']?>"><?= $row['cat_name']?></a>
+                                  </h5>
+                                  <div class="rating-box">
+                                      <ul class="rating">
+                                          <li><i class="fa fa-star-o"></i></li>
+                                          <li><i class="fa fa-star-o"></i></li>
+                                          <li><i class="fa fa-star-o"></i></li>
+                                          <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                          <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                      </ul>
+                                  </div>
+                              </div>
+                              <h4><a class="product_name" href="./single-product.php?id=<?= $row['product_id'] ?>"><?= $row['title']?></a></h4>
+                              <div class="price-box">
+                                  <span class="new-price"><?= $row['price']?></span>
+                              </div>
+                          </div>
+                          <div class="add-actions">
+                              <ul class="add-actions-link">
+                                  <li class="add-cart active"><a href="shopping-cart.html">Add to cart</a></li>
+                                  <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
+                                  <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+                  <!-- single-product-wrap end -->
+              </div>
+                <?php
+                  }
+              } else {
+                  echo "<h3>No Product found</h3>";
+              } 
+              ?>
+          </div>
+
+
+       ====================== 19. How to create Single Product Page   ======================
+
+       1. On page top you written this code :
+
+       <?php include_once("./components/header.php");
+        require_once("../config/connection.php");
+
+        if (!isset($_GET['id'])) {
+            echo "<script>location.href='./shop.php'</script>";
+        }
+        $id = $_GET['id'];
+        $getProducts = "SELECT * FROM `products` as p
+        INNER JOIN `categories` as c
+        ON p.cat_id = c.cat_id where p.product_id = $id";
+        $result = mysqli_query($connection,$getProducts);
+        if (mysqli_num_rows($result) <=0) {
+            echo "<script>location.href='./shop.php'</script>";
+          
+        } $product = mysqli_fetch_assoc($result);
+       ?>
+
+       2. Product details page work :
+
+          <div class="product-info">
+              <h2><?= $product['title']?></h2>
+              <div class="price-box pt-20">
+                  <span class="new-price new-price-2">Rs. <?= $product['price']?></span>
+              </div>
+              <div class="product-desc">
+                  <p>
+                      <span><?= $product['description']?></span>
+                  </p>
+              </div>
+              <div class="single-add-to-cart">
+                  <form action="addtocart.php" method="post" class="cart-quantity">
+                          <input name="product_id"  value="<?= $product['product_id'] ?>" type="hidden">
+                          <input name="price"  value="<?= $product['price'] ?>" type="hidden">
+                      <div class="quantity">
+                          <label>Quantity</label>
+                          <div class="cart-plus-minus">
+                              <input name="qty" class="cart-plus-minus-box" value="1" type="text">
+                              <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
+                              <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
+                          </div>
+                      </div>
+                      <button class="add-to-cart" type="submit" name="addtocart">Add to cart</button>
+                  </form>
+              </div>
+          </div>
+
+
+       ====================== 19. How to create Add to cart page   ======================
+
+       1. You written this code  in Single Product Page :
+
+           <div class="single-add-to-cart">
+              <form action="addtocart.php" method="post" class="cart-quantity">
+                      <input name="product_id"  value="<?= $product['product_id'] ?>" type="hidden">
+                      <input name="price"  value="<?= $product['price'] ?>" type="hidden">
+                  <div class="quantity">
+                      <label>Quantity</label>
+                      <div class="cart-plus-minus">
+                          <input name="qty" class="cart-plus-minus-box" value="1" type="text">
+                          <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
+                          <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
+                      </div>
+                  </div>
+                  <button class="add-to-cart" type="submit" name="addtocart">Add to cart</button>
+              </form>
+           </div>
+
+       2. You Create add to cart page create and written this code  :
+
+       <?php
+        require_once("../config/connection.php");
+        session_start();
+
+
+        if (!isset($_SESSION['role']) || $_SESSION['role']!="user") {
+          echo "<script>location.href='../userPanel/login.php'</script>";
+        }
+        if (isset($_POST['addtocart'])) {
+            $qty = $_POST['qty'];
+            $product_id = $_POST['product_id'];
+            $price = $_POST['price'];
+            $user_id = $_SESSION['user_id'];
+            $total = $price * $qty;
+            }
+            $checkProduct = "SELECT * FROM cart where product_id = $product_id and user_id = $user_id";
+            $checkProductResult = mysqli_query($connection,$checkProduct);
+            if (mysqli_num_rows($checkProductResult) > 0) {
+                $cartdata = mysqli_fetch_assoc($checkProductResult);
+                $newQty = $qty + $cartdata['qty'];
+                $newTotal = $price * $newQty;
+
+                // Update
+                $updateCart = "UPDATE `cart` SET `qty`=$newQty,`total`=$newTotal WHERE product_id = $product_id and user_id = $user_id";
+                $result = mysqli_query($connection,$updateCart);
+                if ($result) {
+                    echo "<script>alert('Product added to cart!')
+                    location.href='./index.php'</script>";
+                }
+                else{
+                    echo "<script>alert('Failed to add to cart!')
+                    location.href='./index.php'</script>";
+                }
+            } else {
+                $addtocart = "INSERT INTO `cart`(`user_id`, `product_id`, `qty`, `total`) VALUES ('$user_id','$product_id','$qty','$total')";
+                $result = mysqli_query($connection,$addtocart);
+                if ($result) {
+                    echo "<script>alert('Product added to cart!')
+                    location.href='./index.php'</script>";
+                }
+                else{
+                    echo "<script>alert('Failed to add to cart!')
+                    location.href='./index.php'</script>";
+                }
+                }   
+       ?>
+
+
+
+
+
+        
 
 
 

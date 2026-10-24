@@ -58,13 +58,12 @@ if (mysqli_num_rows($result) <=0) {
                                     </div>
                                     <div class="single-add-to-cart">
                                         <form action="addtocart.php" method="post" class="cart-quantity">
+                                                <input name="product_id"  value="<?= $product['product_id'] ?>" type="hidden">
+                                                <input name="price"  value="<?= $product['price'] ?>" type="hidden">
                                             <div class="quantity">
                                                 <label>Quantity</label>
                                                 <div class="cart-plus-minus">
-                                                    <input name="product_id"  value="<?= $product['product_id'] ?>" type="hidden">
-                                                    <input name="price"  value="<?= $product['price'] ?>" type="hidden">
                                                     <input name="qty" class="cart-plus-minus-box" value="1" type="text">
-
                                                     <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
                                                     <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                                                 </div>

@@ -136,6 +136,7 @@ if (isset($_POST['login'])) {
       $_SESSION['email'] = $userRow['email'];
       $_SESSION['role'] = $userRow['role'];
       $_SESSION['username'] = $userRow['username'];
+      $_SESSION['user_id'] = $userRow['user_id'];
 
 
 

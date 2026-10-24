@@ -113,15 +113,11 @@ require_once("../config/connection.php");
                                                     </div>
                                                     <!-- single-product-wrap end -->
                                                 </div>
-
-                                                        <?php
+                                                 <?php
                                                     }
                                                 } else {
                                                     echo "<h3>No Product found</h3>";
-                                                }
-                                                
-                                                
-                                                
+                                                } 
                                                 ?>
                                              
 

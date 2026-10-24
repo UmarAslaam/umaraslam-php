@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 10, 2026 at 07:49 AM
+-- Generation Time: Oct 24, 2026 at 07:52 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `2512b2-php`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `cart_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `total` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`cart_id`, `user_id`, `product_id`, `qty`, `total`) VALUES
+(2, 3, 9, 5, 6000),
+(3, 6, 9, 3, 3600);
 
 -- --------------------------------------------------------
 
@@ -96,11 +118,20 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `username`, `email`, `password`, `role`, `created_at`, `status`) VALUES
 (3, 'kamran', 'kamran@gmail.com', '$2y$10$18ob7nuAMC1u6BzaDD8RkeVCevCm8RzE0t3X.ifZDSFuBb/h80S6m', 'user', '2026-09-24 10:30:22', 1),
-(5, 'Umar', 'umar@gmail.com', '$2y$10$SYgPt./OCi22rF6kXUxIGueJCZGHyGpr6YShTWUCBYwi4U5CNu3nC', 'admin', '2026-09-26 10:45:45', 1);
+(5, 'Umar', 'umar@gmail.com', '$2y$10$SYgPt./OCi22rF6kXUxIGueJCZGHyGpr6YShTWUCBYwi4U5CNu3nC', 'admin', '2026-09-26 10:45:45', 1),
+(6, 'Omar', 'Omar@gmail.com', '$2y$10$DSZuREv46V1LoLhSLWbbZ.x056nvHaS6IY/XCSJ1l580AjnzQW9Bu', 'user', '2026-10-24 10:34:01', 1);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`cart_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `product_id` (`product_id`);
 
 --
 -- Indexes for table `categories`
@@ -126,6 +157,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
@@ -141,11 +178,18 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `cart`
+--
+ALTER TABLE `cart`
+  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+  ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
 
 --
 -- Constraints for table `products`

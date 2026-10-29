@@ -228,11 +228,11 @@
                                             <div class="minicart">
                                                 <ul class="minicart-product-list">
                                                     <li>
-                                                        <a href="single-product.html" class="minicart-product-image">
+                                                        <a href="./single-product.php" class="minicart-product-image">
                                                             <img src="images/product/small-size/5.jpg" alt="cart products">
                                                         </a>
                                                         <div class="minicart-product-details">
-                                                            <h6><a href="single-product.html">Aenean eu tristique</a></h6>
+                                                            <h6><a href="./single-product.php">Aenean eu tristique</a></h6>
                                                             <span>£40 x 1</span>
                                                         </div>
                                                         <button class="close" title="Remove">
@@ -240,11 +240,11 @@
                                                         </button>
                                                     </li>
                                                     <li>
-                                                        <a href="single-product.html" class="minicart-product-image">
+                                                        <a href="./single-product.php" class="minicart-product-image">
                                                             <img src="images/product/small-size/6.jpg" alt="cart products">
                                                         </a>
                                                         <div class="minicart-product-details">
-                                                            <h6><a href="single-product.html">Aenean eu tristique</a></h6>
+                                                            <h6><a href="./single-product.php">Aenean eu tristique</a></h6>
                                                             <span>£40 x 1</span>
                                                         </div>
                                                         <button class="close" title="Remove">
@@ -254,7 +254,7 @@
                                                 </ul>
                                                 <p class="minicart-total">SUBTOTAL: <span>£80.00</span></p>
                                                 <div class="minicart-button">
-                                                    <a href="shopping-cart.html" class="li-button li-button-fullwidth li-button-dark">
+                                                    <a href="./shopping-cart.php" class="li-button li-button-fullwidth li-button-dark">
                                                         <span>View Full Cart</span>
                                                     </a>
                                                     <a href="checkout.html" class="li-button li-button-fullwidth">
@@ -313,9 +313,9 @@
                                                             <li><a href="single-product-tab-style-right.html">Single Product Tab Style Right</a></li>
                                                         </ul>
                                                     </li>
-                                                    <li><a href="single-product.html">Single Products</a>
+                                                    <li><a href="./single-product.php">Single Products</a>
                                                         <ul>
-                                                            <li><a href="single-product.html">Single Product</a></li>
+                                                            <li><a href="./single-product.php">Single Product</a></li>
                                                             <li><a href="single-product-sale.html">Single Product Sale</a></li>
                                                             <li><a href="single-product-group.html">Single Product Group</a></li>
                                                             <li><a href="single-product-normal.html">Single Product Normal</a></li>

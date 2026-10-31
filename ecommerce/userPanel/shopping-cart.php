@@ -1,6 +1,7 @@
 <?php
 session_start();
-include_once("./components/header.php")
+include_once("./components/header.php");
+require_once("../config/connection.php");
 ?>
             <!-- Begin Li's Breadcrumb Area -->
             <div class="breadcrumb-area">
@@ -40,21 +41,42 @@ include_once("./components/header.php")
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
+                                            <?php
+                                            $user_id = $_SESSION['user_id'];
+                                            $getCartData = "SELECT * FROM `cart` as c
+                                            INNER JOIN products as p
+                                            ON c.product_id = p.product_id WHERE user_id=$user_id";
+                                            $getCartDataResult= mysqli_query($connection,$getCartData);
+
+                                            if (mysqli_num_rows($getCartDataResult)==0) {
+                                                echo"<h2>No Cart data</h2>";
+                                            } else {
+                                                while ($row = mysqli_fetch_assoc($getCartDataResult)) {
+                                                ?>
+                                                <tr>
                                                 <td class="li-product-remove"><a href="#"><i class="fa fa-times"></i></a></td>
-                                                <td class="li-product-thumbnail"><a href="#"><img src="images/product/small-size/5.jpg" alt="Li's Product Image"></a></td>
-                                                <td class="li-product-name"><a href="#">Accusantium dolorem1</a></td>
-                                                <td class="li-product-price"><span class="amount">$46.80</span></td>
+                                                <td class="li-product-thumbnail"><a href="#"><img src="../admin/uploads/<?= $row['image'] ?>" height="60" alt="Li's Product Image"></a></td>
+                                                <td class="li-product-name"><a href="#"><?= $row['title'] ?></a></td>
+                                                <td class="li-product-price"><span class="amount"><?= $row['price'] ?></span></td>
                                                 <td class="quantity">
                                                     <label>Quantity</label>
                                                     <div class="cart-plus-minus">
-                                                        <input class="cart-plus-minus-box" value="1" type="text">
+                                                        <input class="cart-plus-minus-box" type="text" value="<?= $row['qty'] ?>">
                                                         <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
                                                         <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                                                     </div>
                                                 </td>
-                                                <td class="product-subtotal"><span class="amount">$70.00</span></td>
+                                                <td class="product-subtotal"><span class="amount"><?= $row['total'] ?></span></td>
                                             </tr>
+
+                                                <?php    
+                                                
+                                            }
+                                            }
+                                            
+                                            
+                                            ?>
+                                        
                                         </tbody>
                                     </table>
 
